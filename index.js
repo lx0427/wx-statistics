@@ -3,25 +3,30 @@ var queryString = require('./query-string.js')
 // 统计url
 var getUrlByCode = function (code) {
   var bussinessHash = [{ // 全网统计（登录注册）
-    url: 'https://gw.fdc.com.cn/site_data.js',
-    codes: ['a0001', 'a0002', 'a0012','a0017','a0018','a0019','a0020','a0021','a0022','a0023','a0024','a0025']
-  },
-  { // 报名
-    url: 'https://gw.fdc.com.cn/sign_up_data.js',
-    codes: ['a0003', 'ac004', 'a0005', 'a0006', 'a0008', 'a0009', 'a0013', 'a0016']
-  },
-  { // 出售出租
-    url: 'https://gw.fdc.com.cn/rent_old_data.js',
-    codes: ['a0014', 'a0015']
-  },
-  { // 问答
-    url: 'https://gw.fdc.com.cn/qa_data.js',
-    codes: ['a0010', 'a0011','a0026']
-  },
-  { // 活动
-    url: 'https://gw.fdc.com.cn/activity_data.js',
-    codes: ['a0099']
-  }
+      url: 'https://gw.fdc.com.cn/site_data.js',
+      codes: ['a0001', 'a0002', 'a0012', 'a0017', 'a0018', 'a0019', 'a0020', 'a0021', 'a0022', 'a0023', 'a0024', 'a0025']
+    },
+    { // 报名
+      url: 'https://gw.fdc.com.cn/sign_up_data.js',
+      codes: ['a0003', 'ac004', 'a0005', 'a0006', 'a0008', 'a0009', 'a0013', 'a0016']
+    },
+    { // 出售出租
+      url: 'https://gw.fdc.com.cn/rent_old_data.js',
+      codes: ['a0014', 'a0015']
+    },
+    { // 问答
+      url: 'https://gw.fdc.com.cn/qa_data.js',
+      codes: ['a0010', 'a0011', 'a0026']
+    },
+    { // 活动
+      url: 'https://gw.fdc.com.cn/activity_data.js',
+      codes: ['a0099']
+    },
+    { // 经纪人服务人次统计
+      url: 'http://testphoo.fdc.com.cn/agent_service_data.js',
+      // url: 'http://gw.fdc.com.cn/agent_service_data.js',
+      codes: ['a0027']
+    },
   ]
   if (!code) { // 不埋code,默认记录访问
     return bussinessHash[0].url
@@ -99,10 +104,17 @@ exports.browse = function (spm, labelString) {
  * @param {*} code | 交互码
  * @param {*} useid | 选填，登录成功设置用户id
  */
-exports.interaction = function (code, userid) {
+exports.interaction = function (code, userid, record) {
   userid && (data.userid = userid)
   var params = JSON.parse(JSON.stringify(data))
   params.spm = params.spm + ':' + code
+  if (record) {
+    for (var key in record) {
+      if (record.hasOwnProperty(key)) {
+        params[key] = record[key];
+      }
+    }
+  }
   console.log(params, 'interaction')
   request(getUrlByCode(code), params)
 }

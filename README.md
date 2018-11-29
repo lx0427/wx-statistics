@@ -37,7 +37,7 @@ onShow() {
 }
 ```
 
-### .interaction(*code*,*[userId]*)
+### .interaction(*code*,*[userId]*,*[record]*)
 
 #### code
 
@@ -67,6 +67,10 @@ methods:{
   }
 }     
 ```
+#### record
+
+Type: `string`<br>
+Description: `其他需要记录字段`
 
 ## 业务码表格
 
@@ -98,4 +102,5 @@ methods:{
 |          |            | 为我荐房                               | a0024  |
 |          |            | 为我荐房提问按钮                       | a0025  |
 |          |            | 为我荐房提问提交                       | a0026  |
+|          |            | 经纪人服务人次统计                     | a0027  |
 
