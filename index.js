@@ -23,8 +23,8 @@ var getUrlByCode = function (code) {
       codes: ['a0099']
     },
     { // 经纪人服务人次统计
-      url: 'http://testphoo.fdc.com.cn/agent_service_data.js',
-      // url: 'http://gw.fdc.com.cn/agent_service_data.js',
+      // url: 'http://testphoo.fdc.com.cn/agent_service_data.js',
+      url: 'http://gw.fdc.com.cn/agent_service_data.js',
       codes: ['a0027']
     },
   ]
